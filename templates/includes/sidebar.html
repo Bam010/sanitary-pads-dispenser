@@ -1,0 +1,51 @@
+<!-- [ navigation menu ] start -->
+
+<nav class="pcoded-navbar">
+    <div class="navbar-wrapper">
+        <div class="navbar-brand header-logo">
+            <a href="/" class="b-brand">
+                <div class="b-bg">
+                    <i class="feather icon-trending-up"></i>
+                </div>
+                <span class="b-title">Mechatronics</span>
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+        </div>
+        <div class="navbar-content scroll-div">
+            <ul class="nav pcoded-inner-navbar">
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Navigation</label>
+                </li>
+
+                <li data-username="dashboard" 
+                    class="nav-item {% if 'index' in segment %} active {% endif %}">
+                    <a href="/index" class="nav-link ">
+                        <span class="pcoded-micon"><i class="feather icon-home"></i></span><span
+                            class="pcoded-mtext">Dashboard</span></a>
+                </li>
+
+                <li data-username="Products" 
+                    class="nav-item {% if 'products' in segment %} active {% endif %}">
+                    <a href="/products" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-box"></i></span>
+                            <span class="pcoded-mtext">Products</span></a>
+                </li>
+
+                <li data-username="User" 
+                    class="nav-item {% if 'user' in segment %} active {% endif %}">
+                    <a href="/user" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-user"></i></span>
+                            <span class="pcoded-mtext">User</span></a>
+                </li>
+
+                <li data-username="Transaction" 
+                    class="nav-item {% if 'table' in segment %} active {% endif %}">
+                    <a href="/table" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-server"></i></span>
+                            <span class="pcoded-mtext">Transaction Table</span></a>
+                </li>                             
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- [ navigation menu ] end -->
