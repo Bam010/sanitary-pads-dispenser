@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from jinja2 import TemplateNotFound
 from flask import Blueprint
 import os
+from datetime import datetime
 
 import requests
 
@@ -37,6 +38,7 @@ user = get_record(url_user)
 countLoc = get_record(url_countLoc)
 product = get_record(url_product)
 
+monthly_user = [person for person in user if datetime.strptime(str(person['first day out']), '%Y-%m-%dT%H:%M:%S.%fZ').month == datetime.now().month]
 
 # start of Flask
 blueprint = Blueprint(
@@ -90,10 +92,8 @@ def get_segment(request):
         return None
 app = Flask(__name__)
 app.config.ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets')
-app.config.db = {'trans': transaction,
-                'user': user,
-                'loc': countLoc,
-                'prod': product}
-
+app.config.db = {'trans': transaction, 'user': user,
+                'loc': countLoc, 'prod': product,
+                'monthly-user': monthly_user, 'test': 'hi'}
 
 app.register_blueprint(blueprint)
