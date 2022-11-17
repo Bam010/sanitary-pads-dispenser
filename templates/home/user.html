@@ -18,7 +18,7 @@
                         <div class="page-wrapper">
 
                             <!-- [ Frist Content ] start -->
-                            <div class="row">
+                            <div class="row justify-content-center">
 
                             	<!--[ Total unique user section ] start-->
                                 <div class="col-xl-4 col-md-6">
@@ -88,18 +88,48 @@
 
                             </div>
                             <!--First Row end-->
-
-                            <!--Chart start-->
                             <div class="row">
-
-                                <!-- [ Morris Chart ] start -->
                                 <div class="col-xl-6">
                                     <div class="card">
                                         <div class="card-header">
                                             <h5>New user count per day per occupation</h5>
                                         </div>
                                         <div class="card-block">
-                                            <div id="line-chart-1" class="ChartShadow" style="height:300px"></div>
+                                            
+                                            <canvas id="new-user-day-occu" class="ChartShadow" style="height:300px">
+                                                <script>
+                                                    var ctx = document.getElementById("new-user-day-occu").getContext("2d");
+                                                    var lineChart = new Chart(ctx, {
+                                                    type: 'line',
+                                                    data: {
+                                                        labels: {{ config.db['user_date_occu']['columns'] | safe}},
+                                                        datasets: [
+                                                        {
+                                                            label: "lecturer",
+                                                            data: {{ config.db['user_date_occu']['data'][0] | safe}},
+                                                            fill: false,
+                                                            borderColor: "rgb(75, 192, 192)",
+                                                            lineTension: 0.1
+                                                        },
+                                                        {
+                                                            label: "student",
+                                                            data: {{ config.db['user_date_occu']['data'][1] | safe}},
+                                                            fill: false,
+                                                            borderColor: "rgb(0, 0, 192)",
+                                                            lineTension: 0.1
+                                                        }
+                                                    ]
+                                                    },
+                                                    options: {
+                                                        legend: {
+                                                        position: 'right',
+                                                        align: 'center'
+                                                      }
+                                                    }
+                                                    
+                                                    });
+                                                </script>
+                                            </canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -110,23 +140,81 @@
                                             <h5>New user count per day</h5>
                                         </div>
                                         <div class="card-block">
-                                            <div id="line-chart-2" class="ChartShadow" style="height:300px"></div>
+                                            <canvas id="lineChart" class="ChartShadow" style="height:300px">
+                                                <script>
+                                                    var ctx = document.getElementById("lineChart").getContext("2d");
+                                                    var lineChart = new Chart(ctx, {
+                                                    type: 'line',
+                                                    data: {
+                                                        labels: {{ config.db['user_by_date']['columns'] | safe}},
+                                                        datasets: [
+                                                        {
+                                                            label: "users",
+                                                            data: {{ config.db['user_by_date']['data'][0] | safe}},
+                                                            fill: false,
+                                                            borderColor: "rgb(75, 192, 192)",
+                                                            lineTension: 0.1
+                                                        }
+                                                    ]},
+                                                    options: {
+                                                        legend: {
+                                                        position: 'right',
+                                                        align: 'center'
+                                                      }
+                                                    }
+                                                    
+                                                    });
+                                                </script>
+                                            </canvas>                                            
                                         </div>
                                     </div>
                                 </div>
+              
                             </div>
 
-                            <br></div>
 
                             <div class="row">
+
                                 <div class="col-xl-6">
                                     <div class="card">
                                         <div class="card-header">
                                             <h5>User Occupation</h5>
                                         </div>
                                         <div class="card-block">
-                                            <div id="donut-chart-occu" style="height:300px"></div>
+                                            <canvas id="donut-chart-occu" class="ChartShadow" style="height:300px">
+                                                <script>
+                                                    var ctx = document.getElementById("donut-chart-occu").getContext("2d");
+                                                    var pieChart = new Chart(ctx, {
+                                                    type: 'pie',
+                                                    data: {
+                                                        labels: {{ config.db['user_occu']['columns'] |safe}},
+                                                        datasets: [
+                                                        {
+                                                            label: 'amount',
+                                                            data: {{ config.db['user_occu']['data'][0] |safe}},
+                                                            backgroundColor: [
+                                                              'rgb(255, 99, 132)',
+                                                              'rgb(54, 162, 235)'
+                                                            ],
+                                                            hoverOffset: 4
+                                                        }
+                                                    ]
+                                                    },
+                                                    options: {
+                                                                
+                                                      legend: {
+                                                        position: 'right',
+                                                        align: 'center'
+                                                      }
+                                                    
+                                                    }
+                                                    
+                                                    });
+                                                </script>
+                                            </canvas>
+                                            
                                         </div>
+                                        
                                     </div>
                                 </div>
 
@@ -136,12 +224,45 @@
                                             <h5>User Age</h5>
                                         </div>
                                         <div class="card-block">
-                                            <div id="donut-chart-age" style="height:300px"></div>
+                                            <canvas id="donut-chart-age" class="ChartShadow" style="height:300px">
+                                                <script>
+                                                    var ctx = document.getElementById("donut-chart-age").getContext("2d");
+                                                    var pieChart = new Chart(ctx, {
+                                                    type: 'pie',
+                                                    data: {
+                                                        labels: {{ config.db['user_age']['columns'] |safe}},
+                                                        datasets: [
+                                                        {
+                                                            label: 'amount',
+                                                            data: {{ config.db['user_age']['data'][0] |safe}},
+                                                            backgroundColor: [
+                                                              'rgb(255, 99, 132)',
+                                                              'rgb(54, 162, 235)',
+                                                              'rgb(1, 99, 132)',
+                                                              'rgb(54, 1, 235)',
+                                                              'rgb(1, 99, 1)',
+                                                              'rgb(1, 1, 235)',
+                                                              'rgb(1, 1, 1)'
+                                                            ],
+                                                            hoverOffset: 4
+                                                        }
+                                                    ]
+                                                    },
+                                                    options: {
+                                                        legend: {
+                                                        position: 'right',
+                                                        align: 'center'
+                                                      }
+                                                    }
+                                                    
+                                                    });
+                                                </script>
+                                            </canvas>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
-                            <!--Chart end-->
 
                         </div>
                     </div>
@@ -157,6 +278,6 @@
     <!-- chart-morris Js -->
     <script src="{{ config.ASSETS_ROOT }}/plugins/chart-morris/js/raphael.min.js"></script>
     <script src="{{ config.ASSETS_ROOT }}/plugins/chart-morris/js/morris.min.js"></script>
-    <script src="{{ config.ASSETS_ROOT }}/js/pages/chart-morris-custom.js"></script>
+    <script src="{{ config.ASSETS_ROOT }}/js/pages/user.js"></script>
 
 {% endblock javascripts %}

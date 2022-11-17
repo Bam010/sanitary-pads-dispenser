@@ -2,43 +2,9 @@ from flask import Flask, render_template, request
 from jinja2 import TemplateNotFound
 from flask import Blueprint
 import os
-from datetime import datetime
 
-import requests
-
-# from airtable
-base_id = "appTlv32dv1GIHn3z"
-url_transaction = "https://api.airtable.com/v0/" + base_id + "/" + "Picking"
-url_user = "https://api.airtable.com/v0/" + base_id + "/" + "user"
-url_countLoc = "https://api.airtable.com/v0/" + base_id + "/" + "countLoc"
-url_product = "https://api.airtable.com/v0/" + base_id + "/" + "product"
-
-api_key = "key8YMPs0IVcwKxCe"
-headers = {'Authorization': 'Bearer ' + api_key}
-
-def get_record(url):
-    params = ()
-    airtable_records = []
-    run = True
-    while run is True:
-        response = requests.get(url, params=params, headers=headers)
-        airtable_response = response.json()
-        airtable_records += (airtable_response['records'])
-
-        if 'offset' in airtable_response:
-            run = True
-            params = (('offset', airtable_response['offset']),)
-        else:
-            run = False
-
-    return [value['fields'] for value in airtable_records]
-
-transaction = get_record(url_transaction)
-user = get_record(url_user)
-countLoc = get_record(url_countLoc)
-product = get_record(url_product)
-
-monthly_user = [person for person in user if datetime.strptime(str(person['first day out']), '%Y-%m-%dT%H:%M:%S.%fZ').month == datetime.now().month]
+from dataframe.airtable import transaction, user, countLoc, product
+from dataframe.user import monthly_user, user_by_date, pd_user, user_date_occu, user_occu, user_age
 
 # start of Flask
 blueprint = Blueprint(
@@ -90,10 +56,13 @@ def get_segment(request):
 
     except:
         return None
+
 app = Flask(__name__)
-app.config.ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets')
-app.config.db = {'trans': transaction, 'user': user,
-                'loc': countLoc, 'prod': product,
-                'monthly-user': monthly_user, 'test': 'hi'}
+app.config.from_object('config.Config')
+app.config.db = {'trans': transaction, 'user': user, 'loc': countLoc, 
+                'prod': product, 'monthly-user': monthly_user,
+                'user_by_date': user_by_date, 'user_date_occu': user_date_occu, 
+                'user_occu': user_occu, 'user_age':user_age
+                 }
 
 app.register_blueprint(blueprint)
