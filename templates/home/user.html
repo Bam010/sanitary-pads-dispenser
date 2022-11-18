@@ -108,14 +108,14 @@
                                                             label: "lecturer",
                                                             data: {{ config.db['user_date_occu']['data'][0] | safe}},
                                                             fill: false,
-                                                            borderColor: "rgb(75, 192, 192)",
+                                                            borderColor: '#1de9b6',
                                                             lineTension: 0.1
                                                         },
                                                         {
                                                             label: "student",
                                                             data: {{ config.db['user_date_occu']['data'][1] | safe}},
                                                             fill: false,
-                                                            borderColor: "rgb(0, 0, 192)",
+                                                            borderColor: '#A389D4',
                                                             lineTension: 0.1
                                                         }
                                                     ]
@@ -152,7 +152,7 @@
                                                             label: "users",
                                                             data: {{ config.db['user_by_date']['data'][0] | safe}},
                                                             fill: false,
-                                                            borderColor: "rgb(75, 192, 192)",
+                                                            borderColor: "#1de9b6",
                                                             lineTension: 0.1
                                                         }
                                                     ]},
@@ -193,8 +193,8 @@
                                                             label: 'amount',
                                                             data: {{ config.db['user_occu']['data'][0] |safe}},
                                                             backgroundColor: [
-                                                              'rgb(255, 99, 132)',
-                                                              'rgb(54, 162, 235)'
+                                                                '#00FFD1',
+                                                                '#A389D4'
                                                             ],
                                                             hoverOffset: 4
                                                         }
@@ -236,13 +236,16 @@
                                                             label: 'amount',
                                                             data: {{ config.db['user_age']['data'][0] |safe}},
                                                             backgroundColor: [
-                                                              'rgb(255, 99, 132)',
-                                                              'rgb(54, 162, 235)',
-                                                              'rgb(1, 99, 132)',
-                                                              'rgb(54, 1, 235)',
-                                                              'rgb(1, 99, 1)',
-                                                              'rgb(1, 1, 235)',
-                                                              'rgb(1, 1, 1)'
+                                                                '#00FFD1',
+                                                                '#85FEDE',
+                                                                '#72FFFF',
+                                                                '#00D7FF',
+                                                                '#0096FF',
+                                                                '#7900FF',
+                                                                '#A389D4',
+                                                                '#94B3FD',
+                                                                '#94DAFF'
+                                                                
                                                             ],
                                                             hoverOffset: 4
                                                         }
