@@ -11,9 +11,20 @@
 
             <div class="pcoded-content">
                 <div class="pcoded-inner-content">
-                    <!-- [ breadcrumb ] start -->
 
-                    <!-- [ breadcrumb ] end -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="page-header-title">
+                                        <h4 class="m-b-10">User Page</h4>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="main-body">
                         <div class="page-wrapper">
 
@@ -99,28 +110,52 @@
                                             <canvas id="new-user-day-occu" class="ChartShadow" style="height:300px">
                                                 <script>
                                                     var ctx = document.getElementById("new-user-day-occu").getContext("2d");
+                                                    // var color = ['#1de9b6', '#A389D4', '#72FFFF']
+
+                                                    // var data = []
+                                                    // for (let i=0; i<{{ config.db['user_date_occu']['index'] | length}}; i++) {
+                                                    //     data += { label: {{ config.db['user_date_occu']['index'][0] }},
+                                                    //             data: {{ config.db['user_date_occu']['data'][0] }},
+                                                    //             fill: false,
+                                                    //             borderColor: color[0],
+                                                    //             lineTension: 0
+                                                    //         }
+                                                    // }
                                                     var lineChart = new Chart(ctx, {
                                                     type: 'line',
                                                     data: {
                                                         labels: {{ config.db['user_date_occu']['columns'] | safe}},
                                                         datasets: [
-                                                        {
-                                                            label: "lecturer",
-                                                            data: {{ config.db['user_date_occu']['data'][0] | safe}},
+                                                        {   label: 'lecturer',
+                                                            data: {{ config.db['user_date_occu']['data'][0]}},
                                                             fill: false,
                                                             borderColor: '#1de9b6',
-                                                            lineTension: 0.1
+                                                            lineTension: 0
                                                         },
-                                                        {
-                                                            label: "student",
-                                                            data: {{ config.db['user_date_occu']['data'][1] | safe}},
+                                                        {   label: 'student',
+                                                            data: {{ config.db['user_date_occu']['data'][1]}},
                                                             fill: false,
                                                             borderColor: '#A389D4',
-                                                            lineTension: 0.1
-                                                        }
-                                                    ]
+                                                            lineTension: 0
+                                                        },
+                                                        {   label: 'university staff',
+                                                            data: {{ config.db['user_date_occu']['data'][2]}},
+                                                            fill: false,
+                                                            borderColor: '#00D7FF',
+                                                            lineTension: 0
+                                                        }]
+
                                                     },
                                                     options: {
+                                                        scales: {
+                                                                yAxes: [{
+
+                                                                    display: true,
+                                                                    ticks: {
+                                                                        beginAtZero: true
+                                                                    }
+                                                                }]
+                                                            },
                                                         legend: {
                                                         position: 'right',
                                                         align: 'center'
@@ -153,10 +188,19 @@
                                                             data: {{ config.db['user_by_date']['data'][0] | safe}},
                                                             fill: false,
                                                             borderColor: "#1de9b6",
-                                                            lineTension: 0.1
+                                                            lineTension: 0
                                                         }
                                                     ]},
                                                     options: {
+                                                        scales: {
+                                                                yAxes: [{
+
+                                                                    display: true,
+                                                                    ticks: {
+                                                                        beginAtZero: true
+                                                                    }
+                                                                }]
+                                                            },
                                                         legend: {
                                                         position: 'right',
                                                         align: 'center'
@@ -194,7 +238,8 @@
                                                             data: {{ config.db['user_occu']['data'][0] |safe}},
                                                             backgroundColor: [
                                                                 '#00FFD1',
-                                                                '#A389D4'
+                                                                '#A389D4',
+                                                                '#00D7FF'
                                                             ],
                                                             hoverOffset: 4
                                                         }
@@ -244,7 +289,11 @@
                                                                 '#7900FF',
                                                                 '#A389D4',
                                                                 '#94B3FD',
-                                                                '#94DAFF'
+                                                                '#94DAFF',
+                                                                '#A0E4CB',
+                                                                '#0D4C92',
+                                                                '#59C1BD'
+
                                                                 
                                                             ],
                                                             hoverOffset: 4

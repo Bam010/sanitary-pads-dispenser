@@ -3,14 +3,14 @@ from dataframe.airtable import user
 from datetime import datetime
 import numpy as np
 
-monthly_user = [person for person in user 
-				if datetime.strptime(str(person['first day out']), '%Y-%m-%dT%H:%M:%S.%fZ').month == datetime.now().month]
+pd_user = pd.DataFrame(data=user, columns=['user', 'first day out', 'Age', 'Occupation', 'out day', 'out night', 'total out', 'total in', 'Picking 2'])
+pd_user.drop(columns=[ 'out day', 'out night', 'total out', 'total in','Picking 2'], inplace=True)
 
-pd_user = pd.DataFrame(data=user, columns=['user', 'first day out', 'Age', 'Occupation', 'out day', 'out night', 'Picking 2'])
-pd_user.drop(columns=[ 'out day', 'out night', 'Picking 2'], inplace=True)
+# 'user', 'first day out', 'Age', 'Occupation'
 
-pd_user['first day out'] = pd.to_datetime(pd_user['first day out'], format = '%Y-%m-%dT%H:%M:%S.%fZ')
-pd_user['first day out'] = pd_user['first day out'].apply(lambda x: x.strftime('%Y-%m-%d'))
+pd_user['first day out'] = pd.to_datetime(pd_user['first day out'], format = '%Y-%m-%d %H:%M:%S').apply(lambda x: str(x.date()))
+
+monthly_user = pd_user[pd_user['first day out'].apply(lambda x: int(x[5:7])) == datetime.now().month]
 
 user_age = pd_user[['Age', 'user']].groupby(by='Age').count()
 user_age = user_age.T.to_dict('split')

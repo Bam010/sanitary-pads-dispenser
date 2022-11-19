@@ -90,7 +90,7 @@ h1 {
 }
 
 h2 {
-  font-size: 44px;
+  font-size: 38px;
 }
 
 h3 {
@@ -183,11 +183,34 @@ strong {
 p.text-muted {
   font-size: 13px;
 }
+.card-inner {
+  border-radius: 10px;
+  border:1px solid;
+  -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.2);
+          box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.2);
+  margin: 15px;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  padding: 10px;
+}
+
+.green {
+  border-color: #1de9b6;
+}
+.pink {
+  border-color: #FF67E7;
+}
+.yellow {
+  border-color: #f4c22b;
+}
+.purple {
+  border-color: #a389d4;
+}
 
 .card {
   border-radius: 0;
-  -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
-          box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+  -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.2);
+          box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.2);
   border: none;
   margin-bottom: 30px;
   -webkit-transition: all 0.5s ease-in-out;
@@ -1299,6 +1322,10 @@ p.text-muted {
   color: #a389d4;
 }
 
+.text-c-pink {
+  color: #FF67E7;
+}
+
 /*====== text-color css ends ======*/
 /*====== Card top border css starts ======*/
 .card-border-c-blue {
@@ -1319,6 +1346,10 @@ p.text-muted {
 
 .card-border-c-purple {
   border-top: 4px solid #a389d4;
+}
+
+.card-border-c-pink {
+  border-top: 4px solid #FF67E7;
 }
 
 /*====== Card top border ends ======*/
@@ -6332,7 +6363,9 @@ body.layout-8 .card:hover {
   border-radius: 0;
 }
 
+
 .card .card-block code {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: #eee;
   margin: 5px;
   display: inline-block;

@@ -4,7 +4,8 @@ from flask import Blueprint
 import os
 
 from dataframe.airtable import transaction, user, countLoc, product
-from dataframe.user import monthly_user, user_by_date, pd_user, user_date_occu, user_occu, user_age
+from dataframe.user import monthly_user, user_by_date, pd_user, user_date_occu, user_occu, user_age, pd_user
+from dataframe.product import prod, loc, trans_total_prod, trans_total_loc
 
 # start of Flask
 blueprint = Blueprint(
@@ -62,7 +63,9 @@ app.config.from_object('config.Config')
 app.config.db = {'trans': transaction, 'user': user, 'loc': countLoc, 
                 'prod': product, 'monthly-user': monthly_user,
                 'user_by_date': user_by_date, 'user_date_occu': user_date_occu, 
-                'user_occu': user_occu, 'user_age':user_age
+                'user_occu': user_occu, 'user_age':user_age,
+                'prod': prod, 'loc': loc,
+                'trans_total_prod':trans_total_prod , 'trans_total_loc':trans_total_loc
                  }
 
 app.register_blueprint(blueprint)
